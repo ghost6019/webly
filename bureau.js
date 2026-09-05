@@ -18,34 +18,49 @@ const DEFAULT_CHECKS = [
   { id: "email", label: "Vérifier que Gmail reçoit bien les mailto du formulaire" }
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (sessionStorage.getItem(SESSION_KEY) === "1") {
-    openApp();
-  } else {
-    initGate();
+document.addEventListener("DOMContentLoaded", async () => {
+  const fromUrl = new URLSearchParams(location.search).get("password") || "";
+  if (sessionStorage.getItem(SESSION_KEY) === "1" || await isValidPassword(fromUrl)) {
+    unlock();
+    return;
   }
+  initGate(fromUrl);
 });
 
-function initGate() {
+function initGate(fromUrl) {
   const form = document.getElementById("gate-form");
+  const field = document.getElementById("mot-de-passe");
   const error = document.getElementById("gate-error");
+  if (fromUrl) field.value = fromUrl;
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const value = document.getElementById("mot-de-passe").value.trim();
-    let ok = false;
-    try {
-      ok = (await sha256(value)) === PASS_HASH;
-    } catch {
-      ok = false;
-    }
-    if (!ok) ok = value === "atelier-webly";
-    if (ok) {
-      sessionStorage.setItem(SESSION_KEY, "1");
-      openApp();
+    const value = field.value.trim() || fromUrl.trim();
+    if (await isValidPassword(value)) {
+      unlock();
       return;
     }
     error.hidden = false;
   });
+}
+
+async function isValidPassword(value) {
+  const clean = String(value || "").trim();
+  if (!clean) return false;
+  try {
+    if ((await sha256(clean)) === PASS_HASH) return true;
+  } catch {
+    /* file:// ou contexte non sécurisé */
+  }
+  return clean === "atelier-webly";
+}
+
+function unlock() {
+  sessionStorage.setItem(SESSION_KEY, "1");
+  if (location.search) {
+    history.replaceState({}, "", location.pathname);
+  }
+  openApp();
 }
 
 async function sha256(text) {
