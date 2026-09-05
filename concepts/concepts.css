@@ -7,13 +7,18 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+}
 
 body {
   margin: 0;
   font-family: var(--font);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 a { color: inherit; }
@@ -120,6 +125,7 @@ h3 { margin: 0 0 0.4rem; font-size: 1.05rem; }
   text-decoration: none;
   font-weight: 600;
   border: 1px solid transparent;
+  touch-action: manipulation;
 }
 
 .btn-ghost {
@@ -311,8 +317,92 @@ footer.site {
 }
 
 @media (max-width: 640px) {
-  .hero-split, .grid-3, .grid-2, .grid-4, .steps, .mosaic { grid-template-columns: 1fr; }
-  .pager { flex-direction: column; }
+  .wrap { width: min(1080px, calc(100% - 1.5rem)); }
+
+  .concept-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding: calc(0.55rem + env(safe-area-inset-top, 0px)) 1rem 0.65rem;
+    font-size: 0.8rem;
+  }
+
+  .concept-banner a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 1rem 0;
+  }
+
+  .top nav {
+    justify-content: flex-start;
+    width: 100%;
+    gap: 0.15rem 0.85rem;
+  }
+
+  .top nav a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .hero {
+    padding: 1.6rem 0 2rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.85rem, 8.4vw, 2.45rem);
+    max-width: none;
+  }
+
+  .hero-split, .grid-3, .grid-2, .grid-4, .steps, .mosaic {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .hero-actions .btn,
+  .cta .btn {
+    width: 100%;
+  }
+
+  .visual {
+    min-height: 170px;
+  }
+
+  .section, .section-soft {
+    padding: 2.35rem 0;
+  }
+
+  .cta {
+    padding: 2.4rem 0 3rem;
+  }
+
+  .pager {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .pager a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  footer.site {
+    padding: 1.2rem 0 calc(1.4rem + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 /* Thèmes */

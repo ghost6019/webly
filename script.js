@@ -72,6 +72,10 @@ function initNav() {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") close();
   });
+
+  window.addEventListener("resize", () => {
+    if (window.matchMedia("(min-width: 761px)").matches) close();
+  });
 }
 
 function initReveal() {
