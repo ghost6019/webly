@@ -1,0 +1,191 @@
+/* Bureau Webly — interne.
+   Pour changer le mot de passe :
+   node -e "console.log(require('crypto').createHash('sha256').update('NOUVEAU','utf8').digest('hex'))"
+   puis remplacer PASS_HASH. */
+const PASS_HASH = "7f9f1635f47cfb0b03dc9d80ed014c73b20422b452fdff46c1b5daa940a51b65";
+const SESSION_KEY = "webly-bureau-ok";
+const NOTES_KEY = "webly-bureau-notes";
+const CHECKS_KEY = "webly-bureau-checks";
+const LEADS_KEY = "webly-bureau-leads";
+
+const DEFAULT_CHECKS = [
+  { id: "phone", label: "Téléphone à afficher sur le site et les mentions légales" },
+  { id: "siret", label: "SIRET / dénomination légale" },
+  { id: "address", label: "Adresse / siège" },
+  { id: "publisher", label: "Responsable de la publication" },
+  { id: "host", label: "Mentions d’hébergement (aujourd’hui : GitHub Pages)" },
+  { id: "domain", label: "Nom de domaine (le site public pointe encore vers www.webly.fr)" },
+  { id: "email", label: "Vérifier que Gmail reçoit bien les mailto du formulaire" }
+];
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (sessionStorage.getItem(SESSION_KEY) === "1") {
+    openApp();
+  } else {
+    initGate();
+  }
+});
+
+function initGate() {
+  const form = document.getElementById("gate-form");
+  const error = document.getElementById("gate-error");
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const value = document.getElementById("mot-de-passe").value;
+    const hash = await sha256(value);
+    if (hash === PASS_HASH) {
+      sessionStorage.setItem(SESSION_KEY, "1");
+      openApp();
+      return;
+    }
+    error.hidden = false;
+  });
+}
+
+async function sha256(text) {
+  const data = new TextEncoder().encode(text);
+  const buf = await crypto.subtle.digest("SHA-256", data);
+  return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+function openApp() {
+  document.getElementById("gate").hidden = true;
+  document.getElementById("app").hidden = false;
+  initLogout();
+  initCopy();
+  initNotes();
+  initChecks();
+  initLeads();
+}
+
+function initLogout() {
+  document.getElementById("logout").addEventListener("click", () => {
+    sessionStorage.removeItem(SESSION_KEY);
+    location.reload();
+  });
+}
+
+function initCopy() {
+  document.querySelectorAll("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(btn.getAttribute("data-copy"));
+        btn.textContent = "Copié";
+        btn.classList.add("is-ok");
+        setTimeout(() => {
+          btn.textContent = "Copier";
+          btn.classList.remove("is-ok");
+        }, 1400);
+      } catch {
+        btn.textContent = "Ctrl+C";
+      }
+    });
+  });
+}
+
+function initNotes() {
+  const field = document.getElementById("notes-field");
+  const status = document.getElementById("notes-status");
+  const saved = localStorage.getItem(NOTES_KEY) || "";
+  field.value = saved;
+  status.textContent = saved ? "Enregistré sur cet appareil." : "Vide pour l’instant.";
+
+  let timer;
+  field.addEventListener("input", () => {
+    status.textContent = "Enregistrement…";
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      localStorage.setItem(NOTES_KEY, field.value);
+      status.textContent = field.value.trim() ? "Enregistré sur cet appareil." : "Vide pour l’instant.";
+    }, 280);
+  });
+}
+
+function initChecks() {
+  const root = document.getElementById("checks");
+  const done = new Set(JSON.parse(localStorage.getItem(CHECKS_KEY) || "[]"));
+
+  const render = () => {
+    root.innerHTML = DEFAULT_CHECKS.map((item) => {
+      const checked = done.has(item.id);
+      return `<li>
+        <label class="${checked ? "is-done" : ""}">
+          <input type="checkbox" data-check="${item.id}" ${checked ? "checked" : ""}>
+          <span>${item.label}</span>
+        </label>
+      </li>`;
+    }).join("");
+  };
+
+  render();
+  root.addEventListener("change", (event) => {
+    const input = event.target.closest("[data-check]");
+    if (!input) return;
+    const id = input.getAttribute("data-check");
+    if (input.checked) done.add(id);
+    else done.delete(id);
+    localStorage.setItem(CHECKS_KEY, JSON.stringify([...done]));
+    render();
+  });
+}
+
+function initLeads() {
+  const form = document.getElementById("lead-form");
+  const body = document.getElementById("leads-body");
+  let leads = JSON.parse(localStorage.getItem(LEADS_KEY) || "[]");
+
+  const persist = () => localStorage.setItem(LEADS_KEY, JSON.stringify(leads));
+
+  const render = () => {
+    if (!leads.length) {
+      body.innerHTML = `<tr class="empty-row"><td colspan="7">Aucune demande pour l’instant.</td></tr>`;
+      return;
+    }
+    body.innerHTML = leads.map((lead) => `
+      <tr>
+        <td>${escapeHtml(lead.date)}</td>
+        <td>${escapeHtml(lead.name)}</td>
+        <td>${escapeHtml(lead.company || "—")}</td>
+        <td>${escapeHtml(lead.offer)}</td>
+        <td>${escapeHtml(lead.status)}</td>
+        <td>${escapeHtml(lead.note || "—")}</td>
+        <td><button class="delete" type="button" data-id="${lead.id}">Supprimer</button></td>
+      </tr>
+    `).join("");
+  };
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    leads.unshift({
+      id: String(Date.now()),
+      date: new Date().toLocaleDateString("fr-FR"),
+      name: String(data.get("name") || "").trim(),
+      company: String(data.get("company") || "").trim(),
+      offer: String(data.get("offer") || ""),
+      status: String(data.get("status") || ""),
+      note: String(data.get("note") || "").trim()
+    });
+    persist();
+    form.reset();
+    render();
+  });
+
+  body.addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-id]");
+    if (!btn) return;
+    leads = leads.filter((lead) => lead.id !== btn.getAttribute("data-id"));
+    persist();
+    render();
+  });
+
+  render();
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
