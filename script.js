@@ -1,15 +1,14 @@
 /* ============================================
    Webly — interactions
-   Tarifs : renseignez WEBLY_PRICES pour afficher
-   un montant (ex. "1 200 €"). Laissez null pour
-   conserver « prix à définir ».
+   Tarifs : WEBLY_PRICES (essentiel, professionnel, surmesure, maintenance).
    Formulaire : ouvre un e-mail prérempli vers WEBLY_CONTACT_EMAIL.
    ============================================ */
 
 const WEBLY_PRICES = {
-  essentiel: null,
-  professionnel: null,
-  surmesure: null
+  essentiel: "499 €",
+  professionnel: "799 €",
+  surmesure: "Devis personnalisé",
+  maintenance: "29 €"
 };
 
 const WEBLY_CONTACT_EMAIL = "webly.contact0@gmail.com";
@@ -28,7 +27,12 @@ function applyPrices() {
     const key = el.getAttribute("data-plan");
     const value = WEBLY_PRICES[key];
     const target = el.querySelector(".price-value");
-    if (target && value) target.textContent = value;
+    if (!target || !value) return;
+    if (key === "maintenance") {
+      target.innerHTML = `${value}<small>/mois</small>`;
+    } else {
+      target.textContent = value;
+    }
   });
 }
 
@@ -72,7 +76,7 @@ function initNav() {
 
 function initReveal() {
   const nodes = document.querySelectorAll(
-    ".card, .audience-card, .timeline-item, .project-card, .price-card, .compare-card, .faq-item, .trust-item"
+    ".card, .audience-card, .timeline-item, .project-card, .price-card, .compare-card, .faq-item, .trust-item, .maintenance"
   );
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
