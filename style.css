@@ -34,12 +34,17 @@
 }
 
 html {
+  width: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + 12px);
+  -webkit-text-size-adjust: 100%;
+  color-scheme: light;
 }
 
 body {
   margin: 0;
+  width: 100%;
+  min-height: 100%;
   font-family: var(--font);
   font-size: 1.05rem;
   line-height: 1.6;
