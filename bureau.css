@@ -104,6 +104,10 @@ code {
 
 /* Gate */
 
+[hidden] {
+  display: none !important;
+}
+
 .gate {
   min-height: 100dvh;
   display: grid;
