@@ -22,10 +22,11 @@
       <p class="kicker">Espace interne</p>
       <h1>Bureau Webly</h1>
       <p class="gate-lead">Cette page n’est pas dans le menu du site. Elle sert à retrouver tes infos, tarifs et notes.</p>
-      <form id="gate-form" autocomplete="on">
+      <noscript><p class="gate-error">Active JavaScript pour ouvrir le bureau.</p></noscript>
+      <form id="gate-form" action="#" method="post">
         <label for="mot-de-passe">Mot de passe</label>
-        <input id="mot-de-passe" name="password" type="password" autocomplete="current-password" required>
-        <button class="btn btn-primary" type="submit">Entrer →</button>
+        <input id="mot-de-passe" type="password" autocomplete="current-password">
+        <button class="btn btn-primary" type="button" id="btn-entrer" onclick="entrerBureau()">Entrer →</button>
         <p class="gate-error" id="gate-error" hidden>Mot de passe incorrect.</p>
       </form>
     </div>
@@ -239,6 +240,63 @@
     </main>
   </div>
 
+  <script>
+    (function () {
+      var PASS = "atelier-webly";
+      function showApp() {
+        var gate = document.getElementById("gate");
+        var app = document.getElementById("app");
+        if (gate) gate.hidden = true;
+        if (app) app.hidden = false;
+        try { sessionStorage.setItem("webly-bureau-ok", "1"); } catch (e) {}
+        document.dispatchEvent(new Event("webly-bureau-open"));
+      }
+      function tryUnlock(value) {
+        if (String(value || "").trim() === PASS) {
+          showApp();
+          return true;
+        }
+        var err = document.getElementById("gate-error");
+        if (err) err.hidden = false;
+        return false;
+      }
+      window.entrerBureau = function () {
+        var field = document.getElementById("mot-de-passe");
+        tryUnlock(field ? field.value : "");
+      };
+      function start() {
+        try {
+          if (sessionStorage.getItem("webly-bureau-ok") === "1") {
+            showApp();
+            return;
+          }
+        } catch (e) {}
+        var q = "";
+        try { q = new URLSearchParams(location.search).get("password") || ""; } catch (e2) {}
+        if (q && tryUnlock(q)) return;
+        var btn = document.getElementById("btn-entrer");
+        var field = document.getElementById("mot-de-passe");
+        var form = document.getElementById("gate-form");
+        if (btn) btn.onclick = window.entrerBureau;
+        if (form) form.onsubmit = function (e) {
+          e.preventDefault();
+          window.entrerBureau();
+          return false;
+        };
+        if (field) field.onkeydown = function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            window.entrerBureau();
+          }
+        };
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+      } else {
+        start();
+      }
+    })();
+  </script>
   <script src="bureau.js"></script>
 </body>
 </html>

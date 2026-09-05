@@ -18,60 +18,21 @@ const DEFAULT_CHECKS = [
   { id: "email", label: "Vérifier que Gmail reçoit bien les mailto du formulaire" }
 ];
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const fromUrl = new URLSearchParams(location.search).get("password") || "";
-  if (sessionStorage.getItem(SESSION_KEY) === "1" || await isValidPassword(fromUrl)) {
-    unlock();
-    return;
-  }
-  initGate(fromUrl);
+document.addEventListener("DOMContentLoaded", () => {
+  if (!document.getElementById("app").hidden) openApp();
 });
 
-function initGate(fromUrl) {
-  const form = document.getElementById("gate-form");
-  const field = document.getElementById("mot-de-passe");
-  const error = document.getElementById("gate-error");
-  if (fromUrl) field.value = fromUrl;
-
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const value = field.value.trim() || fromUrl.trim();
-    if (await isValidPassword(value)) {
-      unlock();
-      return;
-    }
-    error.hidden = false;
-  });
-}
-
-async function isValidPassword(value) {
-  const clean = String(value || "").trim();
-  if (!clean) return false;
-  try {
-    if ((await sha256(clean)) === PASS_HASH) return true;
-  } catch {
-    /* file:// ou contexte non sécurisé */
-  }
-  return clean === "atelier-webly";
-}
-
-function unlock() {
-  sessionStorage.setItem(SESSION_KEY, "1");
-  if (location.search) {
-    history.replaceState({}, "", location.pathname);
-  }
+document.addEventListener("webly-bureau-open", () => {
   openApp();
-}
+});
 
-async function sha256(text) {
-  const data = new TextEncoder().encode(text);
-  const buf = await crypto.subtle.digest("SHA-256", data);
-  return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
-}
+let bureauReady = false;
 
 function openApp() {
   document.getElementById("gate").hidden = true;
   document.getElementById("app").hidden = false;
+  if (bureauReady) return;
+  bureauReady = true;
   try {
     initLogout();
     initCopy();
@@ -85,7 +46,7 @@ function openApp() {
 
 function initLogout() {
   document.getElementById("logout").addEventListener("click", () => {
-    sessionStorage.removeItem(SESSION_KEY);
+    try { sessionStorage.removeItem(SESSION_KEY); } catch (e) {}
     location.reload();
   });
 }
