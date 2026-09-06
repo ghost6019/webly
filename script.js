@@ -1,7 +1,7 @@
 /* ============================================
    Webly — interactions
    Tarifs : WEBLY_PRICES (essentiel, professionnel, surmesure, maintenance).
-   Formulaire : ouvre un e-mail prérempli vers WEBLY_CONTACT_EMAIL.
+   Formulaire : envoi direct vers WEBLY_CONTACT_EMAIL via Web3Forms.
    ============================================ */
 
 const WEBLY_PRICES = {
@@ -13,9 +13,8 @@ const WEBLY_PRICES = {
 
 const WEBLY_CONTACT_EMAIL = "webly.contact0@gmail.com";
 
-/* Clé Web3Forms (gratuite) : https://web3forms.com — e-mail webly.contact0@gmail.com
-   Tant qu’elle est vide, le formulaire ouvre encore la messagerie. */
-const WEBLY_FORM_ACCESS_KEY = "";
+/* Clé Web3Forms (gratuite) : https://web3forms.com — e-mail webly.contact0@gmail.com */
+const WEBLY_FORM_ACCESS_KEY = "ee658343-82c9-4e0e-aef6-bc32fd9ba5d2";
 
 document.addEventListener("DOMContentLoaded", () => {
   applyPrices();
