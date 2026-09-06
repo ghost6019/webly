@@ -1203,11 +1203,6 @@ body.nav-open .nav-toggle span:nth-child(3) {
   color: #9aacff;
 }
 
-.placeholder-value {
-  color: #8b89a0;
-  font-style: italic;
-}
-
 .honeypot {
   position: absolute;
   left: -9999px;

@@ -15,7 +15,6 @@ const OFFER_DEFAULTS = {
 };
 
 const DEFAULT_CHECKS = [
-  { id: "phone", label: "Téléphone à afficher sur le site et les mentions légales" },
   { id: "siret", label: "SIRET / dénomination légale" },
   { id: "address", label: "Adresse / siège" },
   { id: "publisher", label: "Responsable de la publication" },
