@@ -13,6 +13,10 @@ const WEBLY_PRICES = {
 
 const WEBLY_CONTACT_EMAIL = "webly.contact0@gmail.com";
 
+/* Clé Web3Forms (gratuite) : https://web3forms.com — e-mail webly.contact0@gmail.com
+   Tant qu’elle est vide, le formulaire ouvre encore la messagerie. */
+const WEBLY_FORM_ACCESS_KEY = "";
+
 document.addEventListener("DOMContentLoaded", () => {
   applyPrices();
   initHeader();
@@ -136,9 +140,15 @@ function initActiveNav() {
 function initForm() {
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
+  const submit = form?.querySelector("[type='submit']");
   if (!form || !status) return;
 
-  form.addEventListener("submit", (event) => {
+  const note = form.querySelector(".form-note");
+  if (note && !WEBLY_FORM_ACCESS_KEY) {
+    note.innerHTML = `En attendant l’activation de l’envoi direct, votre messagerie s’ouvre avec le message déjà prêt pour <a href="mailto:${WEBLY_CONTACT_EMAIL}">${WEBLY_CONTACT_EMAIL}</a>. Voir la <a href="politique-confidentialite.html">politique de confidentialité</a>.`;
+  }
+
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     status.textContent = "";
     status.className = "form-status";
@@ -165,6 +175,54 @@ function initForm() {
     }
 
     const data = Object.fromEntries(new FormData(form).entries());
+    if (data.botcheck) return;
+
+    if (WEBLY_FORM_ACCESS_KEY) {
+      if (submit) {
+        submit.disabled = true;
+        submit.textContent = "Envoi en cours…";
+      }
+      try {
+        const payload = {
+          access_key: WEBLY_FORM_ACCESS_KEY,
+          subject: "Demande de devis — Webly",
+          from_name: "Site Webly",
+          name: data.name || "",
+          email: data.email || "",
+          entreprise: data.entreprise || "—",
+          telephone: data.telephone || "—",
+          activite: data.activite || "—",
+          projet: data.projet || "—",
+          budget: data.budget || "—",
+          message: data.message || ""
+        };
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json();
+        if (!response.ok || result.success === false) {
+          throw new Error(result.message || "envoi impossible");
+        }
+        form.reset();
+        status.textContent = "Message envoyé. Nous vous répondons par e-mail, en général sous 24 à 48 h.";
+        status.classList.add("is-ok");
+      } catch (err) {
+        status.textContent = "L’envoi n’a pas abouti. Écrivez-nous directement à webly.contact0@gmail.com.";
+        status.classList.add("is-error");
+      } finally {
+        if (submit) {
+          submit.disabled = false;
+          submit.textContent = "Envoyer ma demande →";
+        }
+      }
+      return;
+    }
+
     const body = [
       `Nom : ${data.name || ""}`,
       `Entreprise : ${data.entreprise || "—"}`,

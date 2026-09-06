@@ -727,8 +727,12 @@
             <label for="message">Message</label>
             <textarea id="message" name="message" rows="5" required placeholder="Parlez-nous de votre activité et de ce que vous attendez du site."></textarea>
           </div>
+          <div class="form-row honeypot" aria-hidden="true">
+            <label for="botcheck">Ne pas remplir</label>
+            <input id="botcheck" name="botcheck" type="text" tabindex="-1" autocomplete="off">
+          </div>
           <button class="btn btn-primary btn-full" type="submit">Envoyer ma demande →</button>
-          <p class="form-note">En envoyant ce formulaire, votre messagerie s’ouvre avec le message déjà prêt pour <a href="mailto:webly.contact0@gmail.com">webly.contact0@gmail.com</a>. Cliquez sur Envoyer. Voir la <a href="politique-confidentialite.html">politique de confidentialité</a>.</p>
+          <p class="form-note">Le message arrive directement dans notre boîte e-mail. Pas besoin d’ouvrir Outlook. Voir la <a href="politique-confidentialite.html">politique de confidentialité</a>.</p>
           <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>

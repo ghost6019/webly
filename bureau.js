@@ -21,7 +21,7 @@ const DEFAULT_CHECKS = [
   { id: "publisher", label: "Responsable de la publication" },
   { id: "host", label: "Mentions d’hébergement (aujourd’hui : GitHub Pages)" },
   { id: "domain", label: "Nom de domaine (le site public pointe encore vers www.webly.fr)" },
-  { id: "email", label: "Vérifier que Gmail reçoit bien les mailto du formulaire" }
+  { id: "email", label: "Activer le formulaire : clé Web3Forms dans script.js (WEBLY_FORM_ACCESS_KEY)" }
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
