@@ -723,7 +723,7 @@ body.nav-open .nav-toggle span:nth-child(3) {
 
 .projects {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
 }
 
@@ -772,9 +772,6 @@ body.nav-open .nav-toggle span:nth-child(3) {
 
 .theme-plomberie header span,
 .theme-resto header span,
-.theme-bati header span,
-.theme-salon header span,
-.theme-artisan header span,
 .theme-services header span {
   mix-blend-mode: normal;
   opacity: 1;
@@ -822,15 +819,6 @@ body.nav-open .nav-toggle span:nth-child(3) {
 
 .theme-resto .mini-site { background: #f6efe4; color: #3b1d18; }
 .theme-resto header span { background: #7a2e24; color: #f6efe4; }
-
-.theme-bati .mini-site { background: #1e1f1b; color: #f1eee4; }
-.theme-bati header span { background: #d9a441; color: #1e1f1b; }
-
-.theme-salon .mini-site { background: #f7eef1; color: #3a2430; }
-.theme-salon header span { background: #3a2430; color: #f7eef1; }
-
-.theme-artisan .mini-site { background: #efe4d4; color: #3a2a1c; }
-.theme-artisan header span { background: #6b4423; color: #efe4d4; }
 
 .theme-services .mini-site { background: #e8eef2; color: #1c2a33; }
 .theme-services header span { background: #2450ff; color: #fff; }
@@ -1416,6 +1404,10 @@ body.nav-open .nav-toggle span:nth-child(3) {
   }
 
   .hero-visual { min-height: 340px; }
+
+  .projects {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 760px) {
