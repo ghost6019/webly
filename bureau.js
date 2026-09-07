@@ -15,11 +15,11 @@ const OFFER_DEFAULTS = {
 };
 
 const DEFAULT_CHECKS = [
-  { id: "siret", label: "SIRET / dénomination légale" },
-  { id: "address", label: "Adresse / siège" },
-  { id: "publisher", label: "Responsable de la publication" },
-  { id: "host", label: "Mentions d’hébergement (aujourd’hui : GitHub Pages)" },
-  { id: "domain", label: "Nom de domaine (le site public pointe encore vers www.webly.fr)" }
+  { id: "siret", label: "SIRET / dénomination / siège : les coller dans mentions-legales.html et cgv.html" },
+  { id: "publisher", label: "Responsable de la publication (ton nom)" },
+  { id: "host", label: "Mettre à jour l’hébergeur dans les mentions si tu quittes GitHub Pages" },
+  { id: "domain", label: "Nom de domaine (le site public pointe encore vers www.webly.fr)" },
+  { id: "cgv-devis", label: "Joindre le lien des CGV à chaque devis envoyé" }
 ];
 
 document.addEventListener("DOMContentLoaded", () => {

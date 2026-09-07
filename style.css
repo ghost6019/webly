@@ -1337,12 +1337,52 @@ body.nav-open .nav-toggle span:nth-child(3) {
 }
 
 .legal-page h2 {
-  margin-top: 2rem;
-  font-size: 1.5rem;
+  margin-top: 2.4rem;
+  font-size: 1.45rem;
+}
+
+.legal-page h3 {
+  margin-top: 1.35rem;
+  font-size: 1.08rem;
+  font-family: var(--font);
+  font-weight: 600;
 }
 
 .legal-page .container {
   width: min(760px, calc(100% - 2.5rem));
+}
+
+.legal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.1rem;
+  margin: 0 0 1.75rem;
+  font-size: 0.9rem;
+}
+
+.legal-nav a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.legal-nav a:hover,
+.legal-nav a[aria-current="page"] {
+  text-decoration: underline;
+}
+
+.legal-meta {
+  margin: 0.35rem 0 1.25rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.legal-page ul,
+.legal-page ol {
+  padding-left: 1.2rem;
+}
+
+.legal-page li + li {
+  margin-top: 0.35rem;
 }
 
 /* ---------- Reveal ---------- */
