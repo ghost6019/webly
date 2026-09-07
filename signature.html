@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Signature e-mail — Webly</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .sig-page { padding: calc(var(--header-h) + 3rem) 0 4rem; }
+    .sig-page .container { width: min(720px, calc(100% - 2.5rem)); }
+    .sig-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.4rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+    .sig-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+    .sig-plain {
+      margin: 0;
+      white-space: pre-wrap;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+    .sig-status { min-height: 1.4em; margin: 0.75rem 0 0; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <header class="site-header is-scrolled">
+    <div class="header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-mark" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="7" fill="currentColor"/>
+            <path d="M6.5 9.2h3.1l2.15 8.1h.1l2.3-8.1h2.7l2.3 8.1h.1l2.15-8.1H24.5L20.7 19H17.4l-2.25-7.45h-.1L12.8 19H9.5L6.5 9.2Z" fill="#F3F2ED"/>
+          </svg>
+        </span>
+        <span class="logo-word">Webly</span>
+      </a>
+      <a class="btn btn-primary nav-cta" href="index.html">Retour au site</a>
+    </div>
+  </header>
+
+  <main id="contenu" class="sig-page">
+    <div class="container">
+      <p class="kicker">Gmail</p>
+      <h1>Signature e-mail</h1>
+      <p>À coller dans Gmail : Paramètres → Voir tous les paramètres → Général → Signature. Pas de téléphone. Quand tu auras un nom de domaine, on changera le lien du site.</p>
+
+      <div class="sig-card">
+        <p class="kicker">Aperçu</p>
+        <div id="signature-preview">
+          <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="font-family:Arial,Helvetica,sans-serif;">
+            <tr>
+              <td style="vertical-align:top;padding-right:14px;">
+                <img src="https://ghost6019.github.io/webly/apple-touch-icon.png" width="40" height="40" alt="Webly" style="display:block;border:0;border-radius:8px;">
+              </td>
+              <td style="vertical-align:top;border-left:2px solid #2450ff;padding-left:14px;">
+                <p style="margin:0;font-size:15px;font-weight:bold;color:#14151c;line-height:1.3;">Tom</p>
+                <p style="margin:3px 0 0;font-size:13px;color:#2450ff;line-height:1.3;">Webly</p>
+                <p style="margin:3px 0 0;font-size:12px;color:#5a5d68;line-height:1.4;">Création de sites vitrines pour entreprises</p>
+                <p style="margin:10px 0 0;font-size:12px;line-height:1.55;">
+                  <a href="mailto:webly.contact0@gmail.com" style="color:#14151c;text-decoration:none;">webly.contact0@gmail.com</a><br>
+                  <a href="https://ghost6019.github.io/webly/" style="color:#2450ff;text-decoration:none;">ghost6019.github.io/webly</a>
+                </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="sig-actions">
+          <button class="btn btn-primary" type="button" id="copy-html">Copier pour Gmail →</button>
+          <button class="btn btn-ghost" type="button" id="copy-text">Copier en texte</button>
+        </div>
+        <p class="sig-status" id="sig-status" role="status"></p>
+      </div>
+
+      <div class="sig-card">
+        <p class="kicker">Version texte</p>
+        <pre class="sig-plain" id="signature-text">Tom
+Webly — Création de sites vitrines pour entreprises
+webly.contact0@gmail.com
+https://ghost6019.github.io/webly/</pre>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const html = document.getElementById("signature-preview").innerHTML.trim();
+    const text = document.getElementById("signature-text").textContent.trim();
+    const status = document.getElementById("sig-status");
+
+    async function copyHtml() {
+      try {
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            "text/html": new Blob([html], { type: "text/html" }),
+            "text/plain": new Blob([text], { type: "text/plain" })
+          })
+        ]);
+        status.textContent = "Copiée. Colle-la dans la signature Gmail (Ctrl+V).";
+      } catch (err) {
+        status.textContent = "Sélectionne l’aperçu à la souris, copie (Ctrl+C), puis colle dans Gmail.";
+      }
+    }
+
+    async function copyText() {
+      try {
+        await navigator.clipboard.writeText(text);
+        status.textContent = "Version texte copiée.";
+      } catch (err) {
+        status.textContent = "Sélectionne le bloc texte et copie-le.";
+      }
+    }
+
+    document.getElementById("copy-html").addEventListener("click", copyHtml);
+    document.getElementById("copy-text").addEventListener("click", copyText);
+  </script>
+</body>
+</html>

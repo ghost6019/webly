@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /concepts/
 Disallow: /bureau.html
+Disallow: /signature.html
 
 Sitemap: https://www.webly.fr/sitemap.xml
