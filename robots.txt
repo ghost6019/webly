@@ -3,5 +3,6 @@ Allow: /
 Disallow: /concepts/
 Disallow: /bureau.html
 Disallow: /signature.html
+Disallow: /devis.html
 
 Sitemap: https://www.webly.fr/sitemap.xml

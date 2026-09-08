@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Devis — Webly</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <link rel="stylesheet" href="fonts.css">
+  <style>
+    :root {
+      --ink: #14151c;
+      --muted: #5a5d68;
+      --line: #dcdad2;
+      --accent: #2450ff;
+      --bg: #f3f2ed;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Instrument Sans", "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    .bar {
+      position: sticky;
+      top: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.2rem;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+    .bar p { margin: 0; font-size: 0.9rem; color: var(--muted); max-width: 38rem; }
+    .bar-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.55rem 1rem;
+      font: inherit;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-ghost { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+    .sheet {
+      width: min(210mm, calc(100% - 2rem));
+      margin: 1.5rem auto 3rem;
+      background: #fff;
+      padding: 18mm 16mm;
+      box-shadow: 0 18px 50px -28px rgba(20, 21, 28, 0.35);
+    }
+    header.top {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 1.1rem;
+    }
+    .brand { display: flex; gap: 0.7rem; align-items: center; }
+    .brand h1 { margin: 0; font-size: 1.35rem; letter-spacing: 0.06em; }
+    .brand p, .meta p, .who p { margin: 0.15rem 0 0; font-size: 0.88rem; color: var(--muted); }
+    .meta { text-align: right; }
+    h2 {
+      margin: 1.4rem 0 0.6rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .who {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 0.55rem 0.35rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+    td.num, th.num { text-align: right; white-space: nowrap; }
+    .totals { margin-left: auto; width: min(100%, 16rem); }
+    .note, .legal {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .sign {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .sign-box {
+      min-height: 6.5rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.7rem 0.8rem;
+    }
+    [contenteditable="true"] {
+      outline: none;
+      border-bottom: 1px dashed #b9b7ae;
+    }
+    [contenteditable="true"]:focus { background: #e8ecff; border-bottom-color: var(--accent); }
+    @media print {
+      .bar { display: none !important; }
+      body { background: #fff; }
+      .sheet { width: auto; margin: 0; padding: 0; box-shadow: none; }
+      [contenteditable="true"] { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <p>Remplis les zones soulignées, puis <strong>Enregistrer en PDF</strong>. Envoie le PDF + le lien des CGV. Attends l’accord et l’acompte avant de commencer.</p>
+    <div class="bar-actions">
+      <a class="btn btn-ghost" href="cgv.html">Voir les CGV</a>
+      <button class="btn btn-primary" type="button" id="print-btn">Enregistrer en PDF →</button>
+    </div>
+  </div>
+
+  <div class="sheet">
+    <header class="top">
+      <div class="brand">
+        <svg width="36" height="36" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="#2450FF"/>
+          <path d="M7.2 10.2h3.6l2.45 9.3h.12l2.62-9.3h3.1l2.62 9.3h.12l2.45-9.3H28L23.6 21.8h-3.8l-2.55-8.5h-.12l-2.55 8.5H10.8L7.2 10.2Z" fill="#F3F2ED"/>
+        </svg>
+        <div>
+          <h1>WEBLY</h1>
+          <p>Tom LOGEZ — Création de sites vitrines</p>
+          <p>webly.contact0@gmail.com</p>
+          <p>SIRET : <span contenteditable="true">[à compléter]</span></p>
+        </div>
+      </div>
+      <div class="meta">
+        <p><strong>Devis n°</strong> <span contenteditable="true" id="devis-num">D-2026-001</span></p>
+        <p>Date : <span contenteditable="true" id="devis-date"></span></p>
+        <p>Valable 30 jours</p>
+      </div>
+    </header>
+
+    <h2>Client</h2>
+    <div class="who">
+      <div>
+        <p><strong>Nom / entreprise</strong></p>
+        <p contenteditable="true">Nom du client</p>
+        <p contenteditable="true">Adresse (optionnel)</p>
+      </div>
+      <div>
+        <p><strong>Contact</strong></p>
+        <p contenteditable="true">e-mail</p>
+        <p contenteditable="true">téléphone (optionnel)</p>
+      </div>
+    </div>
+
+    <h2>Prestation</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Désignation</th>
+          <th>Détail</th>
+          <th class="num">Prix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td contenteditable="true">Site vitrine — offre Professionnel</td>
+          <td contenteditable="true">Pages prévues, design, formulaire de contact, version mobile, mise en ligne. Deux séries de retours incluses.</td>
+          <td class="num"><span contenteditable="true" id="price">799</span> €</td>
+        </tr>
+        <tr>
+          <td contenteditable="true">Nom de domaine / hébergement (si inclus)</td>
+          <td contenteditable="true">À préciser, ou « non inclus — à la charge du client ».</td>
+          <td class="num"><span contenteditable="true" id="extra">0</span> €</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="totals">
+      <tr>
+        <th>Total</th>
+        <td class="num"><strong id="total">799 €</strong></td>
+      </tr>
+      <tr>
+        <th>Acompte 40 % à la commande</th>
+        <td class="num" id="acompte">320 €</td>
+      </tr>
+      <tr>
+        <th>Solde 60 % avant mise en ligne</th>
+        <td class="num" id="solde">479 €</td>
+      </tr>
+    </table>
+    <p class="note">Prix en euros. Régime de TVA : <span contenteditable="true">TVA non applicable, article 293 B du CGI (à confirmer selon ton régime)</span>.</p>
+
+    <h2>Délai indicatif</h2>
+    <p class="note" contenteditable="true">Quelques semaines après réception de l’acompte et des contenus (textes, photos, logo). Le calendrier est suspendu en cas de contenus manquants.</p>
+
+    <h2>Conditions</h2>
+    <p class="legal">Ce devis est ferme pour la prestation décrite. Il n’inclut pas de boutique en ligne, ni de garantie de classement Google. L’acceptation (signature, e-mail d’accord ou paiement de l’acompte) vaut commande et acceptation des <a href="https://ghost6019.github.io/webly/cgv.html">conditions générales de vente</a>. Acompte de 40 % avant le début des travaux. Solde avant mise en ligne. Deux séries de retours incluses ; tout hors périmètre fera l’objet d’un devis complémentaire.</p>
+
+    <div class="sign">
+      <div class="sign-box">
+        <p><strong>Webly — Tom LOGEZ</strong></p>
+        <p class="note">Fait à <span contenteditable="true">[ville]</span>, le <span id="devis-date-2"></span></p>
+      </div>
+      <div class="sign-box">
+        <p><strong>Le client — Bon pour accord</strong></p>
+        <p class="note">Nom, date et signature</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const dateEl = document.getElementById("devis-date");
+    const dateEl2 = document.getElementById("devis-date-2");
+    const today = new Date().toLocaleDateString("fr-FR");
+    dateEl.textContent = today;
+    dateEl2.textContent = today;
+
+    function euro(n) {
+      return new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(Math.round(n)) + " €";
+    }
+    function num(id) {
+      return parseFloat(String(document.getElementById(id).textContent).replace(/\s/g, "").replace(",", ".")) || 0;
+    }
+    function refresh() {
+      const total = num("price") + num("extra");
+      document.getElementById("total").textContent = euro(total);
+      document.getElementById("acompte").textContent = euro(total * 0.4);
+      document.getElementById("solde").textContent = euro(total * 0.6);
+    }
+    document.getElementById("price").addEventListener("input", refresh);
+    document.getElementById("extra").addEventListener("input", refresh);
+    document.getElementById("print-btn").addEventListener("click", () => window.print());
+    refresh();
+  </script>
+</body>
+</html>
