@@ -184,9 +184,9 @@
           <td class="num"><span contenteditable="true" id="price">799</span> €</td>
         </tr>
         <tr>
-          <td contenteditable="true">Nom de domaine / hébergement (si inclus)</td>
-          <td contenteditable="true">À préciser, ou « non inclus — à la charge du client ».</td>
-          <td class="num"><span contenteditable="true" id="extra">0</span> €</td>
+          <td contenteditable="true">Nom de domaine / hébergement</td>
+          <td contenteditable="true">Non inclus dans ce devis. Le client paie et renouvelle lui-même : nom de domaine chaque année, hébergement chaque année ou chaque mois selon l’offre. Sans ces paiements, le site peut disparaître.</td>
+          <td class="num">—</td>
         </tr>
       </tbody>
     </table>
@@ -211,7 +211,7 @@
     <p class="note" contenteditable="true">Quelques semaines après réception de l’acompte et des contenus (textes, photos, logo). Le calendrier est suspendu en cas de contenus manquants.</p>
 
     <h2>Conditions</h2>
-    <p class="legal">Ce devis est ferme pour la prestation décrite. Il n’inclut pas de boutique en ligne, ni de garantie de classement Google. L’acceptation (signature, e-mail d’accord ou paiement de l’acompte) vaut commande et acceptation des <a href="https://ghost6019.github.io/webly/cgv.html">conditions générales de vente</a>. Acompte de 40 % avant le début des travaux. Solde avant mise en ligne. Deux séries de retours incluses ; tout hors périmètre fera l’objet d’un devis complémentaire.</p>
+    <p class="legal">Ce devis est ferme pour la prestation décrite. Il n’inclut pas de boutique en ligne, ni de garantie de classement Google. Le nom de domaine et l’hébergement ne sont pas compris, sauf ligne contraire ci-dessus : le client les paie et les renouvelle chaque année (ou chaque mois pour certains hébergements). L’acceptation (signature, e-mail d’accord ou paiement de l’acompte) vaut commande et acceptation des <a href="https://ghost6019.github.io/webly/cgv.html">conditions générales de vente</a>. Acompte de 40 % avant le début des travaux. Solde avant mise en ligne. Deux séries de retours incluses ; tout hors périmètre fera l’objet d’un devis complémentaire.</p>
 
     <div class="sign">
       <div class="sign-box">
@@ -239,13 +239,12 @@
       return parseFloat(String(document.getElementById(id).textContent).replace(/\s/g, "").replace(",", ".")) || 0;
     }
     function refresh() {
-      const total = num("price") + num("extra");
+      const total = num("price");
       document.getElementById("total").textContent = euro(total);
       document.getElementById("acompte").textContent = euro(total * 0.4);
       document.getElementById("solde").textContent = euro(total * 0.6);
     }
     document.getElementById("price").addEventListener("input", refresh);
-    document.getElementById("extra").addEventListener("input", refresh);
     document.getElementById("print-btn").addEventListener("click", () => window.print());
     refresh();
   </script>
