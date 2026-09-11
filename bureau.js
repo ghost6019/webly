@@ -7,10 +7,12 @@ const SESSION_KEY = "webly-bureau-ok";
 const NOTES_KEY = "webly-bureau-notes";
 const CHECKS_KEY = "webly-bureau-checks";
 const DEVIS_KEY = "webly-bureau-devis";
+const LEADS_KEY = "webly-bureau-leads";
 const OFFER_DEFAULTS = {
-  Essentiel: 499,
-  Professionnel: 799,
-  "Sur mesure": "",
+  "Une page": 499,
+  "Plusieurs pages": 799,
+  Refonte: "",
+  "Plus complexe": "",
   Maintenance: 29
 };
 

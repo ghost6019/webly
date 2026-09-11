@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Parlons de votre projet — Webly</title>
+  <meta name="description" content="Expliquez votre activité : Webly vous aide à définir le site qu’il vous faut. Aucune connaissance technique nécessaire.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.webly.fr/accompagnement.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="parcours.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <header class="site-header is-scrolled">
+    <div class="header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-mark" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="7" fill="currentColor"/>
+            <path d="M6.5 9.2h3.1l2.15 8.1h.1l2.3-8.1h2.7l2.3 8.1h.1l2.15-8.1H24.5L20.7 19H17.4l-2.25-7.45h-.1L12.8 19H9.5L6.5 9.2Z" fill="#F3F2ED"/>
+          </svg>
+        </span>
+        <span class="logo-word">Webly</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Navigation principale">
+        <ul class="nav-list">
+          <li><a href="index.html#accueil">Accueil</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#tarifs">Parcours</a></li>
+          <li><a href="index.html#contact">Projet</a></li>
+        </ul>
+        <a class="btn btn-primary nav-cta" href="configurateur.html">Configurer mon site</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenu" class="brief-page aide-page">
+    <div class="container">
+      <p class="kicker">J’ai besoin d’aide</p>
+      <h1>Parlons de votre projet</h1>
+      <p class="brief-lead">Quelques questions suffisent. Pas besoin de connaître le web : décrivez votre activité, Webly vous propose ensuite ce qui convient. Une demande n’est pas un contrat.</p>
+
+      <form class="brief-form js-webly-form" id="aide-form" novalidate data-subject="Accompagnement — Webly" data-ok="Merci ! Webly va étudier votre demande et vous recontactera pour définir ensemble le projet le plus adapté.">
+        <div class="form-split">
+          <div class="form-row">
+            <label for="prenom">Prénom</label>
+            <input id="prenom" name="prenom" type="text" autocomplete="given-name" required>
+          </div>
+          <div class="form-row">
+            <label for="nom">Nom</label>
+            <input id="nom" name="nom" type="text" autocomplete="family-name" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="entreprise">Nom de l’entreprise</label>
+          <input id="entreprise" name="entreprise" type="text" autocomplete="organization">
+        </div>
+        <div class="form-row">
+          <label for="activite">Activité</label>
+          <input id="activite" name="activite" type="text" required placeholder="Plomberie, restaurant, cabinet…">
+        </div>
+        <div class="form-row">
+          <span class="field-label">Avez-vous déjà un site internet&nbsp;?</span>
+          <div class="option-picks">
+            <label class="option-pick">
+              <input type="radio" name="site_existant" value="Non" required>
+              <span>Non, pas encore</span>
+            </label>
+            <label class="option-pick">
+              <input type="radio" name="site_existant" value="Oui">
+              <span>Oui, à remplacer ou à améliorer</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="souhait">Que souhaitez-vous créer ou améliorer&nbsp;?</label>
+          <textarea id="souhait" name="souhait" rows="4" required placeholder="Un site pour présenter mon activité, montrer mes réalisations, être contacté…"></textarea>
+        </div>
+        <div class="form-row">
+          <label for="objectifs">Qu’aimeriez-vous que votre site permette de faire&nbsp;?</label>
+          <textarea id="objectifs" name="objectifs" rows="4" required placeholder="Être trouvé, expliquer mes services, prendre rendez-vous, montrer un menu…"></textarea>
+        </div>
+        <div class="form-row">
+          <label for="complement">Informations complémentaires</label>
+          <textarea id="complement" name="complement" rows="4" placeholder="Tout ce qui peut aider : délais, exemples de sites, contraintes…"></textarea>
+        </div>
+        <div class="form-split">
+          <div class="form-row">
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="form-row">
+            <label for="telephone">Téléphone</label>
+            <input id="telephone" name="telephone" type="tel" autocomplete="tel">
+          </div>
+        </div>
+        <div class="form-row honeypot" aria-hidden="true">
+          <label for="botcheck">Ne pas remplir</label>
+          <input id="botcheck" name="botcheck" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <button class="btn btn-primary btn-full" type="submit">Envoyer ma demande →</button>
+        <p class="form-note">Webly vous répond par e-mail. <a href="politique-confidentialite.html">Confidentialité</a>. Vous préférez choisir les options vous-même ? <a href="configurateur.html">Configurer mon site</a>.</p>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

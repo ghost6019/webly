@@ -1,0 +1,477 @@
+/* Configurateur + page d’accompagnement */
+
+.cfg-body {
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+.cfg-top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 64px;
+  padding: 0.7rem 1.4rem;
+  background: rgba(243, 242, 237, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.cfg-escape {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.cfg-escape:hover {
+  color: var(--accent);
+}
+
+.cfg-app {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.6rem 0 6.5rem;
+}
+
+.cfg-fallback {
+  max-width: 36rem;
+}
+
+.cfg-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 17.5rem;
+  gap: 2rem 2.4rem;
+  align-items: start;
+}
+
+.cfg-main {
+  min-width: 0;
+}
+
+.cfg-kicker {
+  margin: 0 0 0.45rem;
+}
+
+.cfg-progress {
+  margin: 0 0 1.6rem;
+}
+
+.cfg-progress-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.cfg-bar {
+  height: 6px;
+  background: #e4e2d8;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.cfg-bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  border-radius: inherit;
+  transition: width 0.35s ease;
+}
+
+.cfg-step h2 {
+  margin: 0 0 0.7rem;
+  font-size: clamp(1.7rem, 3.4vw, 2.35rem);
+}
+
+.cfg-lead {
+  margin: 0 0 1.4rem;
+  max-width: 38rem;
+}
+
+.cfg-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.cfg-grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.cfg-pick {
+  display: block;
+  position: relative;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.15rem 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.cfg-pick:hover {
+  border-color: #c5c2b8;
+}
+
+.cfg-pick:has(:checked) {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.cfg-pick input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cfg-pick strong {
+  display: block;
+  margin: 0 0 0.3rem;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.cfg-pick p {
+  margin: 0;
+  font-size: 0.94rem;
+}
+
+.cfg-price {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--accent);
+}
+
+.cfg-included {
+  color: var(--ink);
+}
+
+.cfg-fields {
+  display: grid;
+  gap: 1rem;
+}
+
+.cfg-fields .form-row {
+  margin: 0;
+}
+
+.cfg-fields label {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.cfg-fields input,
+.cfg-fields textarea,
+.cfg-fields select {
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.85rem;
+}
+
+.cfg-fields input[type="checkbox"] {
+  width: 1.15rem;
+  height: 1.15rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+  flex-shrink: 0;
+  accent-color: var(--accent);
+}
+
+.cfg-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-top: 0.35rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.cfg-consent span {
+  color: var(--ink);
+}
+
+.cfg-fields textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.cfg-fields input:focus,
+.cfg-fields textarea:focus,
+.cfg-fields select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.cfg-group {
+  margin: 0 0 1.6rem;
+}
+
+.cfg-group h3 {
+  margin: 0 0 0.7rem;
+  font-size: 1rem;
+}
+
+.cfg-nav {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.8rem;
+  flex-wrap: wrap;
+}
+
+.cfg-nav .btn {
+  min-height: 48px;
+}
+
+.cfg-error {
+  margin: 0.8rem 0 0;
+  color: #b42318;
+  font-size: 0.95rem;
+}
+
+.cfg-aside {
+  position: sticky;
+  top: 88px;
+  background: var(--dark);
+  color: #fff;
+  border-radius: calc(var(--radius) + 4px);
+  padding: 1.35rem 1.25rem 1.3rem;
+}
+
+.cfg-aside h2 {
+  margin: 0 0 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9aacff;
+  font-family: var(--font);
+}
+
+.cfg-aside dl {
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.cfg-aside dt {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #8b8d98;
+}
+
+.cfg-aside dd {
+  margin: 0.1rem 0 0;
+  font-size: 0.95rem;
+  color: #f3f2ed;
+}
+
+.cfg-total {
+  margin: 1.15rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid #2a2d3a;
+}
+
+.cfg-total strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+
+.cfg-total small {
+  display: block;
+  margin-top: 0.35rem;
+  color: #c5c3ce;
+  font-size: 0.88rem;
+}
+
+.cfg-quote {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  line-height: 1.3;
+  color: #d7ddff;
+}
+
+.cfg-dock {
+  display: none;
+}
+
+.cfg-review {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.cfg-review li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--bg-alt);
+  list-style: none;
+}
+
+.cfg-review ul {
+  margin: 0;
+  padding: 0;
+}
+
+.cfg-review .cfg-review-total {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  background: var(--accent-soft);
+}
+
+.cfg-note {
+  margin: 1.2rem 0 0;
+  padding: 1rem 1.1rem;
+  background: var(--accent-soft);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+}
+
+.cfg-flow {
+  display: grid;
+  gap: 0;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 22rem;
+}
+
+.cfg-flow li {
+  position: relative;
+  padding: 0 0 1.15rem 1.4rem;
+  font-weight: 600;
+}
+
+.cfg-flow li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 99px;
+  background: var(--accent);
+}
+
+.cfg-flow li::after {
+  content: "";
+  position: absolute;
+  left: 3.5px;
+  top: 1.05rem;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+}
+
+.cfg-flow li:last-child {
+  padding-bottom: 0;
+}
+
+.cfg-flow li:last-child::after {
+  display: none;
+}
+
+.cfg-thanks h2 {
+  margin: 0 0 0.8rem;
+}
+
+.field-label {
+  display: block;
+  margin: 0 0 0.45rem;
+  font-weight: 600;
+}
+
+.aide-page .brief-lead {
+  max-width: 38rem;
+}
+
+@media (max-width: 900px) {
+  .cfg-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cfg-aside {
+    display: none;
+  }
+
+  .cfg-dock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 15;
+    padding: 0.8rem 1rem calc(0.8rem + env(safe-area-inset-bottom, 0px));
+    background: var(--dark);
+    color: #fff;
+  }
+
+  .cfg-dock strong {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-weight: 400;
+  }
+
+  .cfg-dock span {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #9aacff;
+  }
+
+  .cfg-app {
+    padding-bottom: 7.5rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .cfg-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .cfg-nav {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .cfg-nav .btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cfg-bar span,
+  .cfg-pick {
+    transition: none;
+  }
+}

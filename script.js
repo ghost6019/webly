@@ -1,13 +1,12 @@
 /* ============================================
    Webly — interactions
-   Tarifs : WEBLY_PRICES (essentiel, professionnel, surmesure, maintenance).
+   Tarifs : WEBLY_PRICES (from, pages, maintenance).
    Formulaire : envoi direct vers WEBLY_CONTACT_EMAIL via Web3Forms.
    ============================================ */
 
 const WEBLY_PRICES = {
-  essentiel: "499 €",
-  professionnel: "799 €",
-  surmesure: "Devis personnalisé",
+  from: "499 €",
+  pages: "799 €",
   maintenance: "29 €"
 };
 
@@ -83,7 +82,7 @@ function initNav() {
 
 function initReveal() {
   const nodes = document.querySelectorAll(
-    ".card, .audience-card, .timeline-item, .project-card, .price-card, .compare-card, .faq-item, .trust-item, .maintenance"
+    ".card, .audience-card, .audience-item, .timeline-item, .project-card, .price-card, .compare-card, .faq-item, .trust-item, .maintenance"
   );
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -137,15 +136,39 @@ function initActiveNav() {
 }
 
 function initForm() {
-  const form = document.getElementById("contact-form");
-  const status = document.getElementById("form-status");
-  const submit = form?.querySelector("[type='submit']");
-  if (!form || !status) return;
+  document.querySelectorAll(".js-webly-form").forEach(bindWeblyForm);
+}
+
+function serializeForm(form) {
+  const acc = {};
+  for (const [key, value] of new FormData(form).entries()) {
+    if (key === "botcheck") continue;
+    if (Object.prototype.hasOwnProperty.call(acc, key)) {
+      const cur = acc[key];
+      acc[key] = Array.isArray(cur) ? cur.concat(value) : [cur, value];
+    } else {
+      acc[key] = value;
+    }
+  }
+  Object.keys(acc).forEach((key) => {
+    if (Array.isArray(acc[key])) acc[key] = acc[key].join(", ");
+  });
+  return acc;
+}
+
+function bindWeblyForm(form) {
+  const status = form.querySelector(".form-status");
+  const submit = form.querySelector("[type='submit']");
+  if (!status) return;
 
   const note = form.querySelector(".form-note");
   if (note && !WEBLY_FORM_ACCESS_KEY) {
     note.innerHTML = `En attendant l’activation de l’envoi direct, votre messagerie s’ouvre avec le message déjà prêt pour <a href="mailto:${WEBLY_CONTACT_EMAIL}">${WEBLY_CONTACT_EMAIL}</a>. Voir la <a href="politique-confidentialite.html">politique de confidentialité</a>.`;
   }
+
+  const subject = form.getAttribute("data-subject") || "Demande de devis — Webly";
+  const okMessage = form.getAttribute("data-ok") || "Message envoyé. Nous vous répondons par e-mail, en général sous 24 à 48 h.";
+  const submitLabel = submit ? submit.textContent : "Envoyer →";
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -154,14 +177,31 @@ function initForm() {
 
     const required = [...form.querySelectorAll("[required]")];
     let valid = true;
+    const radioSeen = new Set();
 
     required.forEach((field) => {
+      if (field.type === "radio") {
+        if (radioSeen.has(field.name)) return;
+        radioSeen.add(field.name);
+        const ok = Boolean(form.querySelector(`input[name="${field.name}"]:checked`));
+        form.querySelectorAll(`input[name="${field.name}"]`).forEach((radio) => {
+          radio.closest("label")?.classList.toggle("is-invalid", !ok);
+        });
+        if (!ok) valid = false;
+        return;
+      }
+      if (field.type === "checkbox") {
+        const ok = field.checked;
+        field.classList.toggle("is-invalid", !ok);
+        if (!ok) valid = false;
+        return;
+      }
       const ok = Boolean(String(field.value).trim());
       field.classList.toggle("is-invalid", !ok);
       if (!ok) valid = false;
     });
 
-    const email = form.querySelector("#email");
+    const email = form.querySelector("input[type='email']");
     if (email && email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
       email.classList.add("is-invalid");
       valid = false;
@@ -173,8 +213,8 @@ function initForm() {
       return;
     }
 
-    const data = Object.fromEntries(new FormData(form).entries());
-    if (data.botcheck) return;
+    const data = serializeForm(form);
+    if (new FormData(form).get("botcheck")) return;
 
     if (WEBLY_FORM_ACCESS_KEY) {
       if (submit) {
@@ -184,16 +224,9 @@ function initForm() {
       try {
         const payload = {
           access_key: WEBLY_FORM_ACCESS_KEY,
-          subject: "Demande de devis — Webly",
+          subject,
           from_name: "Site Webly",
-          name: data.name || "",
-          email: data.email || "",
-          entreprise: data.entreprise || "—",
-          telephone: data.telephone || "—",
-          activite: data.activite || "—",
-          projet: data.projet || "—",
-          budget: data.budget || "—",
-          message: data.message || ""
+          ...data
         };
         const response = await fetch("https://api.web3forms.com/submit", {
           method: "POST",
@@ -208,7 +241,7 @@ function initForm() {
           throw new Error(result.message || "envoi impossible");
         }
         form.reset();
-        status.textContent = "Message envoyé. Nous vous répondons par e-mail, en général sous 24 à 48 h.";
+        status.textContent = okMessage;
         status.classList.add("is-ok");
       } catch (err) {
         status.textContent = "L’envoi n’a pas abouti. Écrivez-nous directement à webly.contact0@gmail.com.";
@@ -216,28 +249,16 @@ function initForm() {
       } finally {
         if (submit) {
           submit.disabled = false;
-          submit.textContent = "Envoyer ma demande →";
+          submit.textContent = submitLabel;
         }
       }
       return;
     }
 
-    const body = [
-      `Nom : ${data.name || ""}`,
-      `Entreprise : ${data.entreprise || "—"}`,
-      `E-mail : ${data.email || ""}`,
-      `Téléphone : ${data.telephone || "—"}`,
-      `Activité : ${data.activite || "—"}`,
-      `Projet : ${data.projet || "—"}`,
-      `Budget : ${data.budget || "—"}`,
-      "",
-      "Message :",
-      data.message || ""
-    ].join("\n");
-
-    const mailto = `mailto:${WEBLY_CONTACT_EMAIL}?subject=${encodeURIComponent("Demande de devis — Webly")}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-
+    const body = Object.entries(data)
+      .map(([key, value]) => `${key} : ${value}`)
+      .join("\n");
+    window.location.href = `mailto:${WEBLY_CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     status.textContent = "Votre messagerie s’ouvre. Cliquez sur Envoyer pour que le message parte vers webly.contact0@gmail.com.";
     status.classList.add("is-ok");
   });

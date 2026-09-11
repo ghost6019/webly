@@ -80,11 +80,11 @@
 
       <section class="stats" aria-label="Tarifs catalogue">
         <article class="stat">
-          <p class="stat-label">Essentiel</p>
-          <p class="stat-value">à partir de 499 €</p>
+          <p class="stat-label">À partir de</p>
+          <p class="stat-value">499 €</p>
         </article>
         <article class="stat">
-          <p class="stat-label">Professionnel</p>
+          <p class="stat-label">Plusieurs pages</p>
           <p class="stat-value">à partir de 799 €</p>
         </article>
         <article class="stat">
@@ -104,8 +104,10 @@
             <li><a href="https://ghost6019.github.io/webly/">Site en ligne (GitHub Pages)</a></li>
             <li><a href="https://github.com/ghost6019/webly">Dépôt GitHub</a></li>
             <li><a href="signature.html">Signature e-mail</a></li>
-            <li><a href="index.html#tarifs">Page tarifs publique</a></li>
-            <li><a href="index.html#contact">Formulaire public</a></li>
+            <li><a href="index.html#tarifs">Deux parcours (configurateur / accompagnement)</a></li>
+            <li><a href="configurateur.html">Configurateur</a></li>
+            <li><a href="accompagnement.html">Accompagnement</a></li>
+            <li><a href="index.html#contact">Formulaire projet</a></li>
             <li><a href="mentions-legales.html">Mentions légales</a></li>
             <li><a href="devis.html">Modèle de devis (PDF)</a></li>
             <li><a href="cgv.html">CGV (à joindre à chaque devis)</a></li>
@@ -142,11 +144,12 @@
             <label>Client
               <input name="client" type="text" required placeholder="Nom ou entreprise">
             </label>
-            <label>Offre
+            <label>Type
               <select name="offer" id="devis-offer">
-                <option value="Essentiel">Essentiel</option>
-                <option value="Professionnel">Professionnel</option>
-                <option value="Sur mesure">Sur mesure</option>
+                <option value="Une page">Une page</option>
+                <option value="Plusieurs pages">Plusieurs pages</option>
+                <option value="Refonte">Refonte</option>
+                <option value="Plus complexe">Plus complexe</option>
                 <option value="Maintenance">Maintenance</option>
               </select>
             </label>
@@ -192,12 +195,12 @@
         </section>
 
         <section class="card card-wide" id="offres">
-          <h2>Offres à rappeler</h2>
+          <h2>À rappeler</h2>
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>Offre</th>
+                  <th>Type</th>
                   <th>Prix</th>
                   <th>Pour qui</th>
                   <th>Inclus (résumé)</th>
@@ -205,33 +208,33 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Essentiel</td>
+                  <td>Vitrine une page</td>
                   <td>À partir de 499 €</td>
                   <td>Présence simple en ligne</td>
-                  <td>Vitrine, design perso, mobile, services, contact, mise en ligne, base technique</td>
+                  <td>Vitrine, design perso, mobile, services, contact, mise en ligne</td>
                 </tr>
                 <tr>
-                  <td>Professionnel</td>
+                  <td>Vitrine plusieurs pages</td>
                   <td>À partir de 799 €</td>
-                  <td>Site plus complet — le plus choisi</td>
-                  <td>Essentiel + plusieurs pages, galerie, SEO de base, animations, perf, accompagnement</td>
+                  <td>Site plus complet</td>
+                  <td>Plusieurs pages, galerie, SEO de base, animations, accompagnement</td>
                 </tr>
                 <tr>
-                  <td>Sur mesure</td>
+                  <td>Refonte / plus complexe</td>
                   <td>Devis</td>
-                  <td>Besoins spécifiques</td>
-                  <td>Réservation, formulaires avancés, intégrations, plus de pages</td>
+                  <td>Site existant ou besoin spécifique</td>
+                  <td>À cadrer (expliquer le projet si besoin)</td>
                 </tr>
                 <tr>
                   <td>Maintenance</td>
                   <td>À partir de 29 €/mois</td>
                   <td>Après mise en ligne</td>
-                  <td>Petites mods, mises à jour, assistance, surveillance — scope exact avec le client</td>
+                  <td>Petites mods, mises à jour, assistance — scope exact avec le client</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p class="hint">Toujours dire « à partir de », sauf Sur mesure = devis. Jamais de prix figé à l’oral si le projet n’est pas cadré.</p>
+          <p class="hint">Deux portes d’entrée : questionnaire en ligne (pas d’appel) ou expliquer le projet. Toujours dire « à partir de ». Jamais de prix figé à l’oral si le projet n’est pas cadré. Brief en ligne ≠ contrat : devis + acompte avant de commencer.</p>
         </section>
 
         <section class="card" id="checklist">
@@ -269,12 +272,14 @@
             <label>Entreprise
               <input name="company" type="text" placeholder="Optionnel">
             </label>
-            <label>Offre
+            <label>Canal / type
               <select name="offer">
-                <option value="Je ne sais pas encore">Je ne sais pas encore</option>
-                <option value="Essentiel">Essentiel</option>
-                <option value="Professionnel">Professionnel</option>
-                <option value="Sur mesure">Sur mesure</option>
+                <option value="En ligne">En ligne</option>
+                <option value="Projet expliqué">Projet expliqué</option>
+                <option value="Une page">Une page</option>
+                <option value="Plusieurs pages">Plusieurs pages</option>
+                <option value="Refonte">Refonte</option>
+                <option value="Plus complexe">Plus complexe</option>
                 <option value="Maintenance">Maintenance</option>
               </select>
             </label>
