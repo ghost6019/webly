@@ -22,7 +22,120 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initActiveNav();
   initForm();
+  initHeroPreview();
 });
+
+const WEBLY_PREVIEWS = {
+  plomberie: {
+    url: "fontaine-et-fils.fr",
+    brand: "Fontaine & Fils",
+    kicker: "Plomberie & dépannage",
+    title: "Intervention rapide, travail soigné.",
+    cta: "Devis",
+    phone: "Urgence 7j/7",
+    href: "concepts/plomberie.html",
+    label: "Voir l’exemple artisan →"
+  },
+  resto: {
+    url: "latabledauguste.fr",
+    brand: "La Table d’Auguste",
+    kicker: "Restaurant bistronomique",
+    title: "Une cuisine de saison, en salle ou en terrasse.",
+    cta: "Réserver",
+    phone: "Menu du soir",
+    href: "concepts/restaurant.html",
+    label: "Voir l’exemple restaurant →"
+  },
+  services: {
+    url: "clairetcompte.fr",
+    brand: "Clair & Compte",
+    kicker: "Conseil aux entreprises",
+    title: "Une lecture claire de vos chiffres.",
+    cta: "Appel",
+    phone: "Prendre RDV",
+    href: "concepts/services.html",
+    label: "Voir l’exemple conseil →"
+  }
+};
+
+function initHeroPreview() {
+  const root = document.querySelector("[data-preview-root]");
+  if (!root) return;
+
+  const tabs = [...root.querySelectorAll("[data-preview]")];
+  const stage = root.querySelector(".device-stage");
+  const fields = {
+    url: root.querySelector(".js-preview-url"),
+    brand: root.querySelector(".js-preview-brand"),
+    kicker: root.querySelector(".js-preview-kicker"),
+    title: root.querySelector(".js-preview-title"),
+    cta: root.querySelector(".js-preview-cta"),
+    phoneBrand: root.querySelector(".js-preview-phone-brand"),
+    phoneLine: root.querySelector(".js-preview-phone-line"),
+    link: root.querySelector(".js-preview-link")
+  };
+
+  let index = 0;
+  let timer = 0;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const apply = (key) => {
+    const data = WEBLY_PREVIEWS[key];
+    if (!data || !stage) return;
+
+    stage.classList.add("is-switching");
+    window.setTimeout(() => {
+      stage.dataset.theme = key;
+      if (fields.url) fields.url.textContent = data.url;
+      if (fields.brand) fields.brand.textContent = data.brand;
+      if (fields.kicker) fields.kicker.textContent = data.kicker;
+      if (fields.title) fields.title.textContent = data.title;
+      if (fields.cta) fields.cta.textContent = data.cta;
+      if (fields.phoneBrand) fields.phoneBrand.textContent = data.brand;
+      if (fields.phoneLine) fields.phoneLine.textContent = data.phone;
+      if (fields.link) {
+        fields.link.href = data.href;
+        fields.link.textContent = data.label;
+      }
+      tabs.forEach((tab) => {
+        tab.setAttribute("aria-selected", String(tab.getAttribute("data-preview") === key));
+      });
+      index = Math.max(0, tabs.findIndex((tab) => tab.getAttribute("data-preview") === key));
+      stage.classList.remove("is-switching");
+    }, reduce ? 0 : 160);
+  };
+
+  const stop = () => {
+    window.clearInterval(timer);
+    timer = 0;
+  };
+
+  const play = () => {
+    if (reduce || tabs.length < 2) return;
+    stop();
+    timer = window.setInterval(() => {
+      const next = tabs[(index + 1) % tabs.length];
+      apply(next.getAttribute("data-preview"));
+    }, 4200);
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      stop();
+      apply(tab.getAttribute("data-preview"));
+      play();
+    });
+  });
+
+  root.addEventListener("mouseenter", stop);
+  root.addEventListener("mouseleave", play);
+  root.addEventListener("focusin", stop);
+  root.addEventListener("focusout", (event) => {
+    if (!root.contains(event.relatedTarget)) play();
+  });
+
+  play();
+}
 
 function applyPrices() {
   document.querySelectorAll("[data-plan]").forEach((el) => {
