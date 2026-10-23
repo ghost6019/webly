@@ -40,12 +40,10 @@
 
       <nav class="nav" id="nav" aria-label="Navigation principale">
         <ul class="nav-list">
-          <li><a href="#accueil">Accueil</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#realisations">Réalisations</a></li>
+          <li><a href="#realisations">Exemples</a></li>
+          <li><a href="#services">Offre</a></li>
           <li><a href="#tarifs">Parcours</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Projet</a></li>
         </ul>
         <a class="btn btn-primary nav-cta" href="#tarifs">Créer mon site →</a>
       </nav>
@@ -82,6 +80,7 @@
           </div>
 
           <div class="device-stage" data-theme="plomberie">
+            <a class="laptop-hit" data-preview-href href="concepts/plomberie.html" aria-label="Voir l’exemple artisan">
             <div class="laptop">
               <div class="laptop-lid">
                 <div class="browser">
@@ -117,6 +116,7 @@
                 <div class="phone-lines"><i></i><i></i><i></i></div>
               </div>
             </div>
+            </a>
           </div>
           <a class="preview-link js-preview-link" href="concepts/plomberie.html">Voir l’exemple artisan →</a>
         </div>
@@ -152,88 +152,89 @@
       </div>
     </div>
 
-    <!-- Services -->
-    <section class="section" id="services">
+    <!-- Réalisations -->
+    <section class="section" id="realisations">
       <div class="container">
         <div class="section-intro">
-          <p class="kicker">Nos services</p>
-          <h2>Ce qu’on fait — et ce qu’on ne fait pas.</h2>
-          <p>De la conception à la mise en ligne, un site vitrine pour présenter, rassurer, et faire contacter. Pas d’e-commerce, pas d’usine à gaz.</p>
+          <p class="kicker">Exemples</p>
+          <h2>Trois vitrines, trois métiers.</h2>
+          <p class="notice">Ce sont des <strong>concepts de démonstration</strong>, pas des clients réels.</p>
         </div>
 
-        <div class="card-grid services-grid">
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <rect x="3" y="4" width="18" height="14" rx="2"/>
-                <path d="M8 21h8M12 18v3"/>
-              </svg>
-            </div>
-            <h3>Création de site vitrine</h3>
-            <p>Un site moderne et professionnel pour présenter votre entreprise, vos services et permettre à vos futurs clients de vous contacter.</p>
-          </article>
+        <div class="projects">
+          <a class="project-card" href="concepts/plomberie.html">
+            <span class="project-preview">
+              <img src="concepts/img/plomberie-hero.jpg" alt="">
+            </span>
+            <span class="project-body">
+              <span class="project-sector">Artisan</span>
+              <span class="project-title">Fontaine &amp; Fils</span>
+              <span class="project-text">Urgence, zone, devis — pensé pour le téléphone.</span>
+              <span class="text-link">Voir le site →</span>
+            </span>
+          </a>
 
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3Z"/>
-                <path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/>
-              </svg>
-            </div>
-            <h3>Design sur mesure</h3>
-            <p>Une identité visuelle adaptée à votre entreprise et à votre secteur d’activité. Pas de modèle générique recyclé.</p>
-          </article>
+          <a class="project-card" href="concepts/restaurant.html">
+            <span class="project-preview">
+              <img src="concepts/img/resto-hero.jpg" alt="">
+            </span>
+            <span class="project-body">
+              <span class="project-sector">Restaurant</span>
+              <span class="project-title">La Table d’Auguste</span>
+              <span class="project-text">Carte, horaires, réservation — sans PDF.</span>
+              <span class="text-link">Voir le site →</span>
+            </span>
+          </a>
 
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <rect x="2" y="4" width="13" height="10" rx="1.5"/>
-                <rect x="17" y="8" width="5" height="8" rx="1.2"/>
-                <path d="M7 20h6"/>
-              </svg>
-            </div>
-            <h3>Responsive</h3>
-            <p>Votre site s’adapte parfaitement aux ordinateurs, tablettes et smartphones. Vos visiteurs vous trouvent, quel que soit l’écran.</p>
-          </article>
+          <a class="project-card" href="concepts/services.html">
+            <span class="project-preview">
+              <img src="concepts/img/services-hero.jpg" alt="">
+            </span>
+            <span class="project-body">
+              <span class="project-sector">Conseil</span>
+              <span class="project-title">Clair &amp; Compte</span>
+              <span class="project-text">Offre, méthode, contact — sans décor inutile.</span>
+              <span class="text-link">Voir le site →</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
 
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <circle cx="11" cy="11" r="7"/>
-                <path d="M20 20l-3.5-3.5"/>
-              </svg>
-            </div>
-            <h3>Préparé pour Google</h3>
-            <p>Structure du site pensée pour les moteurs de recherche : titres, vitesse, mobile, contenus clairs. Cela aide Google à comprendre le site — ça ne garantit pas d’apparaître en première page.</p>
-          </article>
+    <!-- Offre -->
+    <section class="section section-alt" id="services">
+      <div class="container">
+        <div class="section-intro">
+          <p class="kicker">L’offre</p>
+          <h2>Ce qu’on fait — et ce qu’on ne fait pas.</h2>
+          <p>Un site vitrine pour présenter, rassurer, et faire contacter. Rien d’autre.</p>
+        </div>
 
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>
-                <circle cx="12" cy="12" r="4"/>
-              </svg>
-            </div>
-            <h3>Mise en ligne</h3>
-            <p>Webly peut vous accompagner pour le nom de domaine, l’hébergement et la mise en ligne — jusqu’à ce que le site soit accessible à son adresse. Le nom de domaine et l’hébergement se paient ensuite chaque année : ces frais restent les vôtres. Être en ligne, ce n’est pas encore être trouvé sur Google.</p>
+        <div class="split-list">
+          <article class="split-col split-do">
+            <p class="split-tag">On fait</p>
+            <ul>
+              <li><strong>Sites vitrines</strong> Accueil, services, photos, contact. Pensés pour votre métier.</li>
+              <li><strong>Design à vous</strong> Couleurs, typo, ton — pas un thème recyclé.</li>
+              <li><strong>Mise en ligne</strong> Domaine et hébergement à votre nom. Vous les payez chaque année.</li>
+              <li><strong>Évolutions</strong> Textes, photos, une page de plus, si vous le souhaitez.</li>
+            </ul>
           </article>
-
-          <article class="card">
-            <div class="card-icon" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M4 12a8 8 0 0 1 14.6-4.5M20 12a8 8 0 0 1-14.6 4.5"/>
-                <path d="M18.5 4v3.5H15M5.5 20v-3.5H9"/>
-              </svg>
-            </div>
-            <h3>Maintenance</h3>
-            <p>Possibilité de modifier et de faire évoluer le site après sa mise en ligne : textes, photos, nouvelles pages, petits ajustements.</p>
+          <article class="split-col split-dont">
+            <p class="split-tag">On ne fait pas</p>
+            <ul>
+              <li><strong>Boutiques en ligne</strong> Pas d’e-commerce, pas de tunnel de paiement.</li>
+              <li><strong>Packs au kilomètre</strong> Pas de modèle WordPress recollé.</li>
+              <li><strong>Usines à gaz</strong> Pas d’app, pas d’espace client, pas de surcouche inutile.</li>
+              <li><strong>1<sup>re</sup> page Google</strong> On prépare le site. On ne vend pas un classement.</li>
+            </ul>
           </article>
         </div>
       </div>
     </section>
 
     <!-- Pour qui -->
-    <section class="section section-alt" id="pour-qui">
+    <section class="section" id="pour-qui">
       <div class="container audience-layout">
         <div class="section-intro">
           <p class="kicker">Pour qui&nbsp;?</p>
@@ -282,7 +283,7 @@
     </section>
 
     <!-- Méthode -->
-    <section class="section" id="methode">
+    <section class="section section-alt" id="methode">
       <div class="container">
         <div class="section-intro">
           <p class="kicker">Notre méthode</p>
@@ -320,55 +321,6 @@
             </div>
           </li>
         </ol>
-      </div>
-    </section>
-
-    <!-- Réalisations -->
-    <section class="section section-alt" id="realisations">
-      <div class="container">
-        <div class="section-intro">
-          <p class="kicker">Réalisations</p>
-          <h2>Trois exemples de sites vitrines.</h2>
-          <p class="notice">Ce sont des <strong>concepts de démonstration</strong>, pas des clients réels.</p>
-        </div>
-
-        <div class="projects">
-          <article class="project-card">
-            <a class="project-preview" href="concepts/plomberie.html">
-              <img src="concepts/img/plomberie-hero.jpg" alt="Fontaine &amp; Fils — plombier en intervention">
-            </a>
-            <div class="project-body">
-              <p class="project-sector">Artisan</p>
-              <h3>Fontaine &amp; Fils</h3>
-              <p>Urgence, zone d’intervention et devis, pensés pour le mobile.</p>
-              <a class="text-link" href="concepts/plomberie.html">Voir le projet</a>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <a class="project-preview" href="concepts/restaurant.html">
-              <img src="concepts/img/resto-hero.jpg" alt="La Table d’Auguste — salle du restaurant">
-            </a>
-            <div class="project-body">
-              <p class="project-sector">Restaurant</p>
-              <h3>La Table d’Auguste</h3>
-              <p>Carte, horaires et réservation, sans PDF illisible.</p>
-              <a class="text-link" href="concepts/restaurant.html">Voir le projet</a>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <a class="project-preview" href="concepts/services.html">
-              <img src="concepts/img/services-hero.jpg" alt="Clair &amp; Compte — échange autour d’une table">
-            </a>
-            <div class="project-body">
-              <p class="project-sector">Services</p>
-              <h3>Clair &amp; Compte</h3>
-              <p>Offre, méthode et contact, sans décor inutile.</p>
-              <a class="text-link" href="concepts/services.html">Voir le projet</a>
-            </div>
-          </article>
-        </div>
       </div>
     </section>
 
@@ -547,8 +499,12 @@
       <div class="container contact-grid">
         <div class="contact-intro">
           <p class="kicker kicker-on-dark">Votre projet</p>
-          <h2>Expliquez ce que vous souhaitez.</h2>
-          <p>Choisissez le type de site et décrivez ce que vous voulez. Webly vous répond par e-mail. Pour une estimation tout de suite : <a href="configurateur.html">configurer mon site</a>. Pour être guidé : <a href="accompagnement.html">être accompagné</a>.</p>
+          <h2>Deux portes d’entrée. Ou un message.</h2>
+          <p>L’estimation en quelques minutes, ou quelques questions si vous préférez qu’on cadre ensemble. Vous pouvez aussi écrire ici — Webly répond par e-mail.</p>
+          <div class="hero-actions contact-paths">
+            <a class="btn btn-primary" href="configurateur.html">Configurer mon site →</a>
+            <a class="btn btn-ghost btn-ghost-on-dark" href="accompagnement.html">Être accompagné</a>
+          </div>
 
           <dl class="contact-details">
             <div>
@@ -642,11 +598,10 @@
       </div>
       <nav aria-label="Pied de page">
         <ul class="footer-links">
-          <li><a href="#accueil">Accueil</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#realisations">Réalisations</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#realisations">Exemples</a></li>
+          <li><a href="#services">Offre</a></li>
           <li><a href="#tarifs">Parcours</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Projet</a></li>
           <li><a href="configurateur.html">Configurer mon site</a></li>
           <li><a href="accompagnement.html">Être accompagné</a></li>
@@ -673,6 +628,10 @@
     "serviceType": ["Création de site vitrine", "Création de site internet", "Design web sur mesure"]
   }
   </script>
+  <div class="mobile-cta">
+    <a class="btn btn-primary" href="configurateur.html">Configurer mon site →</a>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

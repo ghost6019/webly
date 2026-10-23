@@ -97,6 +97,10 @@ function initHeroPreview() {
         fields.link.href = data.href;
         fields.link.textContent = data.label;
       }
+      root.querySelectorAll("[data-preview-href]").forEach((el) => {
+        el.href = data.href;
+        el.setAttribute("aria-label", data.label.replace(" →", ""));
+      });
       tabs.forEach((tab) => {
         tab.setAttribute("aria-selected", String(tab.getAttribute("data-preview") === key));
       });
@@ -195,7 +199,7 @@ function initNav() {
 
 function initReveal() {
   const nodes = document.querySelectorAll(
-    ".card, .audience-card, .audience-item, .timeline-item, .project-card, .price-card, .compare-card, .faq-item, .trust-item, .maintenance"
+    ".card, .audience-card, .audience-item, .timeline-item, .project-card, .price-card, .compare-card, .faq-item, .trust-item, .maintenance, .split-col"
   );
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {

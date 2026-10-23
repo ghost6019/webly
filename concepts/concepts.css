@@ -81,6 +81,65 @@ h3 { margin: 0 0 0.4rem; font-size: 1.05rem; }
   padding: 3.6rem 0 3.4rem;
 }
 
+.hero-bleed {
+  position: relative;
+  min-height: min(78vh, 640px);
+  display: grid;
+  align-items: end;
+  color: #fff;
+}
+
+.hero-bleed > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-bleed::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(10, 16, 22, 0.78) 0%, rgba(10, 16, 22, 0.42) 48%, rgba(10, 16, 22, 0.12) 100%),
+    linear-gradient(180deg, rgba(10, 16, 22, 0.12), rgba(10, 16, 22, 0.45));
+}
+
+.hero-bleed-copy {
+  position: relative;
+  z-index: 1;
+  padding: 4.2rem 0 3.2rem;
+}
+
+.hero-bleed .label,
+.hero-bleed .lead {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.hero-bleed h1 {
+  max-width: 14ch;
+  color: #fff;
+}
+
+.hero-bleed .btn-ghost {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+  background: transparent;
+}
+
+body.resto .hero-bleed::after {
+  background:
+    linear-gradient(90deg, rgba(40, 18, 14, 0.78) 0%, rgba(40, 18, 14, 0.38) 50%, rgba(40, 18, 14, 0.1) 100%),
+    linear-gradient(180deg, rgba(40, 18, 14, 0.08), rgba(40, 18, 14, 0.5));
+}
+
+body.services .hero-bleed::after {
+  background:
+    linear-gradient(90deg, rgba(18, 28, 38, 0.78) 0%, rgba(18, 28, 38, 0.4) 50%, rgba(18, 28, 38, 0.12) 100%),
+    linear-gradient(180deg, rgba(18, 28, 38, 0.1), rgba(18, 28, 38, 0.48));
+}
+
 .hero-split {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
@@ -452,7 +511,16 @@ footer.site {
     padding: 1.6rem 0 2rem;
   }
 
-  .hero h1 {
+  .hero-bleed {
+    min-height: 72vh;
+  }
+
+  .hero-bleed-copy {
+    padding: 2.4rem 0 2.2rem;
+  }
+
+  .hero h1,
+  .hero-bleed h1 {
     font-size: clamp(1.85rem, 8.4vw, 2.45rem);
     max-width: none;
   }
@@ -564,3 +632,11 @@ body.services { background: #f3f6f8; color: #1c2a33; }
 .services .hero-media { background: #c5d3e4; }
 .services .alert { background: #2450ff; color: #fff; }
 .services footer.site { border-top: 1px solid #dbe3e8; }
+
+.plomberie .hero-bleed .btn-ghost,
+.resto .hero-bleed .btn-ghost,
+.services .hero-bleed .btn-ghost {
+  color: #fff;
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.45);
+}
