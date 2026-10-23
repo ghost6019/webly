@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>La Table d’Auguste — Concept Webly</title>
-  <meta name="description" content="Concept de site vitrine pour un restaurant : menu, horaires, ambiance. Démonstration Webly.">
+  <title>La Table d’Auguste — Restaurant bistronomique</title>
+  <meta name="description" content="Concept de site vitrine Webly : restaurant, carte, horaires, réservation. Démonstration, pas un client réel.">
   <meta name="robots" content="noindex">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180">
@@ -21,7 +21,7 @@
     <a class="brand" href="#accueil">La Table d’Auguste</a>
     <nav aria-label="Concept">
       <a href="#carte">La carte</a>
-      <a href="#ambiance">Ambiance</a>
+      <a href="#ambiance">La salle</a>
       <a href="#infos">Infos</a>
       <a href="#reserver">Réserver</a>
     </nav>
@@ -32,35 +32,39 @@
       <div>
         <p class="label">Restaurant bistronomique</p>
         <h1>Une cuisine de saison, en salle ou en terrasse.</h1>
-        <p class="lead">Le site d’un restaurant doit donner envie, puis rendre service. Menu lisible sur mobile, horaires, accès, réservation : rien de flou, rien de superflu.</p>
+        <p class="lead">Le soir, la salle s’allume doucement. On sert une carte courte, qui change avec le marché. Réservation recommandée, surtout le week-end.</p>
         <div class="hero-actions">
           <a class="btn" href="#reserver">Réserver une table</a>
           <a class="btn btn-ghost" href="#carte">Voir la carte</a>
         </div>
       </div>
-      <div class="visual" role="img" aria-label="Ambiance de salle (illustration)">
-        <span>Salle · Terrasse</span>
-        <b>Le soir, la salle s’allume doucement.</b>
-      </div>
+      <figure class="hero-media">
+        <img src="img/resto-hero.jpg" alt="Salle du restaurant, tables dressées avant le service" fetchpriority="high">
+      </figure>
     </div>
   </section>
 
   <section class="section wrap" id="carte">
-    <h2>Une carte courte, à jour.</h2>
-    <p class="intro">Plats d’exemple, pour montrer comment présenter une carte sans PDF illisible. Les prix et mets se remplacent ensuite par les vôtres.</p>
-    <div class="grid-2">
-      <div class="card">
-        <h3>Entrées</h3>
-        <div class="menu">
-          <div class="menu-row"><div><strong>Velouté de saison</strong><p>Herbes du moment, huile de noisettes</p></div><span>12 €</span></div>
-          <div class="menu-row"><div><strong>Tartare de légumes</strong><p>Citrons confits, pain grillé</p></div><span>14 €</span></div>
+    <h2>La carte du moment.</h2>
+    <p class="intro">Courte, lisible sur téléphone. Pas de PDF à pincer. Les plats et les prix sont des exemples.</p>
+    <div class="menu-layout">
+      <figure class="menu-photo">
+        <img src="img/resto-plat.jpg" alt="Assiette du jour : poisson et légumes de saison">
+      </figure>
+      <div class="menu-cols">
+        <div class="card">
+          <h3>Entrées</h3>
+          <div class="menu">
+            <div class="menu-row"><div><strong>Velouté de saison</strong><p>Herbes du moment, huile de noisettes</p></div><span>12 €</span></div>
+            <div class="menu-row"><div><strong>Tartare de légumes</strong><p>Citrons confits, pain grillé</p></div><span>14 €</span></div>
+          </div>
         </div>
-      </div>
-      <div class="card">
-        <h3>Plats</h3>
-        <div class="menu">
-          <div class="menu-row"><div><strong>Poisson du marché</strong><p>Selon arrivage, légumes rôtis</p></div><span>24 €</span></div>
-          <div class="menu-row"><div><strong>Volaille fermière</strong><p>Jus court, purée</p></div><span>22 €</span></div>
+        <div class="card">
+          <h3>Plats</h3>
+          <div class="menu">
+            <div class="menu-row"><div><strong>Poisson du marché</strong><p>Selon arrivage, légumes rôtis</p></div><span>24 €</span></div>
+            <div class="menu-row"><div><strong>Volaille fermière</strong><p>Jus court, purée</p></div><span>22 €</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -68,23 +72,37 @@
 
   <section class="section-soft" id="ambiance">
     <div class="wrap">
-      <h2>L’ambiance, sans surcharge.</h2>
-      <p class="intro">Des blocs visuels larges valent mieux qu’une galerie trop dense. Sur un vrai projet, on y place vos photos de salle et d’assiettes.</p>
+      <h2>La salle, la terrasse, la cuisine.</h2>
       <div class="mosaic">
-        <figure class="shot"><figcaption>Salle</figcaption></figure>
-        <figure class="shot"><figcaption>Terrasse</figcaption></figure>
-        <figure class="shot"><figcaption>Cuisine ouverte</figcaption></figure>
-        <figure class="shot"><figcaption>Détail de table</figcaption></figure>
-        <figure class="shot"><figcaption>Le soir</figcaption></figure>
+        <figure class="shot">
+          <img src="img/resto-salle.jpg" alt="La salle, lumière du soir">
+          <figcaption>La salle</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="img/resto-terrasse.jpg" alt="Terrasse le soir">
+          <figcaption>Terrasse</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="img/resto-cuisine.jpg" alt="Cuisine ouverte">
+          <figcaption>Cuisine</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="img/resto-plat.jpg" alt="Une assiette">
+          <figcaption>L’assiette</figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="img/resto-hero.jpg" alt="Tables dressées">
+          <figcaption>Le soir</figcaption>
+        </figure>
       </div>
     </div>
   </section>
 
   <section class="section wrap" id="infos">
-    <h2>Les infos qu’on cherche le dimanche soir.</h2>
+    <h2>Les infos du dimanche soir.</h2>
     <div class="grid-2">
       <article class="card">
-        <h3>Horaires (exemple)</h3>
+        <h3>Horaires</h3>
         <ul class="hours">
           <li><span>Mardi — Samedi</span><span>12h – 14h · 19h – 22h</span></li>
           <li><span>Dimanche</span><span>12h – 14h30</span></li>
@@ -94,8 +112,8 @@
       <article class="card">
         <h3>Pratique</h3>
         <ul class="facts">
-          <li><span>Accès</span><span>centre-ville, exemple</span></li>
-          <li><span>Allergènes</span><span>à préciser en salle</span></li>
+          <li><span>Terrasse</span><span>dès qu’il fait beau</span></li>
+          <li><span>Allergènes</span><span>on précise en salle</span></li>
           <li><span>Privatisation</span><span>sur demande</span></li>
         </ul>
       </article>
@@ -104,9 +122,9 @@
 
   <section class="cta" id="reserver">
     <div class="wrap">
-      <h2>Envie d’une vitrine à l’image de votre salle&nbsp;?</h2>
-      <p>Webly crée des sites de restaurant pensés pour le mobile : carte, horaires, réservation.</p>
-      <a class="btn" href="../index.html#tarifs">Choisir mon devis →</a>
+      <h2>Une table pour ce soir&nbsp;?</h2>
+      <p>Sur un vrai site, la réservation part en cuisine. Ici, c’est un exemple Webly.</p>
+      <a class="btn" href="../index.html#tarifs">Créer un site comme celui-ci →</a>
       <nav class="pager" aria-label="Autres concepts">
         <a href="plomberie.html">← Fontaine &amp; Fils</a>
         <a href="../index.html#realisations">Toutes les réalisations</a>
