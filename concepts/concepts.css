@@ -512,11 +512,31 @@ footer.site {
   }
 
   .hero-bleed {
-    min-height: 72vh;
+    min-height: min(68vh, 520px);
   }
 
   .hero-bleed-copy {
-    padding: 2.4rem 0 2.2rem;
+    padding: 2.1rem 0 1.9rem;
+  }
+
+  .hero-bleed .lead {
+    font-size: 0.98rem;
+  }
+
+  .alert {
+    font-size: 0.9rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .mosaic,
+  .mosaic-4 {
+    grid-template-rows: none;
+    gap: 0.65rem;
+  }
+
+  .shot,
+  .shot img {
+    min-height: 180px;
   }
 
   .hero h1,
